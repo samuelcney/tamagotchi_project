@@ -2,7 +2,7 @@ import { useTheme } from "../../components/ThemeProvider";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-export default function Games(){
+export default function GameScreen(){
 
     const {themeColor} = useTheme()
 
@@ -11,7 +11,7 @@ export default function Games(){
             
         <View style={styles.gameContainer}>
             <Text>Clique aqui para jogar pedra, papel e tesoura</Text>
-            <Pressable style={styles.game}></Pressable>
+            <Pressable style={styles.game} onPress={()=>''}></Pressable>
         </View>
 
         <View style={styles.gameContainer}>

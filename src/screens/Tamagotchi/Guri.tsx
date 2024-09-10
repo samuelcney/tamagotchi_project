@@ -6,7 +6,7 @@ import Tamagotchi from '../../components/TamagotchiModel';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 
-export default function CupinchaScreen({...rest}:typeTamagotchi) {
+export default function GuriScreen({...rest}:typeTamagotchi) {
   
   const {themeColor} = useTheme()
 

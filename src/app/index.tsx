@@ -28,16 +28,16 @@ export default function App() {
     }
   }
 
-  // useEffect(()=>{
+  useEffect(()=>{
 
-  //   const intervalId = setInterval(() => {
-  //     updateTamagotchiStatus()
-  //   }, 60 * 1000)
+    const intervalId = setInterval(() => {
+      updateTamagotchiStatus()
+    }, 6 * 60 * 1000)
     
-  //   return () =>{
-  //     clearInterval(intervalId)
-  //   }
-  // },[])
+    return () =>{
+      clearInterval(intervalId)
+    }
+  },[])
 
   return (
     <ThemeProvider>

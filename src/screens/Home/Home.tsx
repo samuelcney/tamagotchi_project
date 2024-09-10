@@ -12,19 +12,29 @@ export default function HomeScreen(){
 
     const {themeColor} = useTheme()
     const [tamagotchis, setTamagotchis] = useState<typeTamagotchi[]>([])
+    const [loading, setLoading] = useState(false)
 
     const navigation = useNavigation<any>()
 
     const getTamagotchis = useCallback(async()=>{
 
+        setLoading(true)
         const realm = await getRealm()
         try{
             const response = realm.objects<typeTamagotchi>("Tamagotchi")
             const ArrayResponse = Array.from(response)
+            setTamagotchis(ArrayResponse)
 
-            setTamagotchis(ArrayResponse)    
+            if(ArrayResponse.length === 0){
+               setLoading(true)  
+            }
+            else{
+                setLoading(false)
+            }
+               
         }
         catch(error){
+            setLoading(false)
             Alert.alert("Erro", "Não foi possível carregar os cupincha...")
             console.log(error)
         }
@@ -60,17 +70,45 @@ export default function HomeScreen(){
         }
         catch(error) {
             console.log(error)
-        }
-        
+        }    
     }
 
     function handleNavigate(tamagotchi: typeTamagotchi){
         navigation.navigate('thirdScreen', {tamagotchi})
     }
 
-      useEffect(()=>{
-        getTamagotchis()
-    },[])
+    useEffect(() => {
+        const loadTamagotchis = async () => {
+            const realm = await getRealm();
+
+            const tamagotchis = realm.objects<typeTamagotchi>("Tamagotchi");
+
+            const listener = () => {
+                setTamagotchis(Array.from(tamagotchis));
+            };
+
+            tamagotchis.addListener(listener);
+
+            return () => {
+                if (tamagotchis && tamagotchis.removeListener) {
+                    tamagotchis.removeListener(listener);
+                }
+            };
+        };
+
+        loadTamagotchis();
+    }, []);
+
+    if(loading){
+        return <View style={[{backgroundColor: themeColor, alignItems: 'center'}, styles.containerList]}>
+            <View style={{width: '100%', height: 20, justifyContent:'center', alignItems: 'flex-end'}} className="mb-3">
+            <Pressable onPress={getTamagotchis}>
+                <Feather name="refresh-cw" size={22} color={'#fff'}/>
+            </Pressable>    
+        </View>
+                    <Text className="text-xl">Não há Guris cadastrados...</Text>
+                </View>
+    }
 
     return(
         <View style={[{backgroundColor: themeColor}, styles.containerList]}>

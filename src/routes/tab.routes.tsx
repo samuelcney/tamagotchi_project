@@ -2,8 +2,8 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { useTheme } from '../components/ThemeProvider'
 
 import Kitchen from '../screens/Tamagotchi/Kitchen'
-import Games from '../screens/Tamagotchi/Games'
-import CupinchaScreen from '../screens/Tamagotchi/Cupincha'
+import Games from '../screens/Tamagotchi/GameScreen'
+import GuriScreen from '../screens/Tamagotchi/Guri'
 
 import { Feather } from '@expo/vector-icons'
 import { useRoute } from '@react-navigation/native'
@@ -19,7 +19,7 @@ export default function TabRoutesHome(){
     const {tamagotchi} = route.params as {tamagotchi: typeTamagotchi}
 
     const ComponentInline = () =>(
-        <CupinchaScreen {...tamagotchi}/>
+        <GuriScreen {...tamagotchi}/>
     )
 
     return(

@@ -32,7 +32,7 @@ export default function Register() {
           status: "Muito bem"
         })
 
-        Alert.alert("Cupincha cadastrado.", 'Seja bem vindo '+ response.name)
+        Alert.alert("Guri cadastrado.", 'Seja bem vindo '+ response.name)
       }
 
       else{
@@ -46,7 +46,7 @@ export default function Register() {
     }
     catch(error){
       console.log('error')
-      Alert.alert("😔", 'Poxa guri, não deu bom...')
+      Alert.alert("😔", 'Poxa, não deu bom...')
     }
   }
 
@@ -54,7 +54,7 @@ export default function Register() {
   return (
     <ScrollView>
       <View className='flex-1 gap-4 mt-24 p-7'>
-        <Text className='text-xl font-bold'>Registre aqui seu Cupincha:</Text>
+        <Text className='text-xl font-bold'>Registre aqui seu Guri:</Text>
         <Input placeholder='Nome para o cupincha' value={name} onChangeText={setName}/>
         <Input placeholder='Insira o link da imagem' value={imageURL} onChangeText={setImageURL}/>
         <Button title='Salvar' color={themeColor} onPress={addNewTamagotchi}/>
