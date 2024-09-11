@@ -80,7 +80,7 @@ export default function App() {
 
     const decayId = setInterval(() => {
       updateTamagotchiParams()
-    }, 3 * 60 * 1000)
+    }, 3*60*1000)
 
     const statusId = setInterval(() => {
       updateTamagotchiStatus()

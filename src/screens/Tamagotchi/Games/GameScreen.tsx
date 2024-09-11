@@ -3,7 +3,7 @@ import { useTheme } from "../../../components/ThemeProvider";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 import { useNavigation } from "@react-navigation/native";
-import { Feather } from "@expo/vector-icons";
+import { Feather, MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function GameScreen({...rest}:typeTamagotchi){
 
@@ -16,7 +16,12 @@ export default function GameScreen({...rest}:typeTamagotchi){
     }
 
     return(
-        <View className='flex-1 items-center justify-evenly' style={{backgroundColor: themeColor}}>
+        <View className='flex-1 items-center justify-center gap-24' style={{backgroundColor: themeColor}}>
+
+            <View className="items-center mt-1">
+                <MaterialCommunityIcons name="emoticon-happy-outline" size={50} color={'#fff'}/>
+                <Text className="font-bold text-2xl text-white">{rest.happiness}</Text>
+            </View>
             
         <View style={styles.gameContainer}>
             <Text className='font-bold text-xl text-white'>Clique aqui para jogar pedra, papel e tesoura</Text>
@@ -43,7 +48,7 @@ const styles = StyleSheet.create({
     game:{
        width: 200,
        height: 200,
-       borderWidth: 2,
+       borderWidth: 4,
        marginTop: 10,
        borderRadius: 16,
        borderColor: '#fff',
