@@ -5,9 +5,10 @@ import Kitchen from '../screens/Tamagotchi/Kitchen'
 import Games from '../screens/Tamagotchi/GameScreen'
 import GuriScreen from '../screens/Tamagotchi/Guri'
 
-import { Feather } from '@expo/vector-icons'
+import { Feather, MaterialCommunityIcons } from '@expo/vector-icons'
 import { useRoute } from '@react-navigation/native'
 import { typeTamagotchi } from '@/types/tamagotchiType'
+import Room from '../screens/Tamagotchi/Room'
 
 const Tab = createBottomTabNavigator()
 
@@ -18,9 +19,11 @@ export default function TabRoutesHome(){
     const route = useRoute()
     const {tamagotchi} = route.params as {tamagotchi: typeTamagotchi}
 
-    const ComponentInline = () =>(
-        <GuriScreen {...tamagotchi}/>
-    )
+    const ComponentGuri = () =><GuriScreen {...tamagotchi}/>
+    const ComponentKitchen = () =><Kitchen {...tamagotchi}/>
+    const ComponentGames = () =><Games {...tamagotchi}/>
+    const ComponentRoom = () =><Room {...tamagotchi}/>
+    
 
     return(
         <Tab.Navigator screenOptions={{
@@ -33,15 +36,15 @@ export default function TabRoutesHome(){
         }}>
             <Tab.Screen 
                 name='Início'
-                component={ComponentInline}
+                component={ComponentGuri}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({color,size})=> <Feather name='home' size={size} color={color} />,
                 }}
-            />
+            ></Tab.Screen>
             <Tab.Screen 
                 name='Cozinha'
-                component={Kitchen}
+                component={ComponentKitchen}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({color,size})=> <Feather name='coffee' size={size} color={color}/>,
@@ -49,8 +52,17 @@ export default function TabRoutesHome(){
                 }}
             />
             <Tab.Screen 
+                name='Quarto'
+                component={ComponentRoom}
+                options={{
+                    headerShown: false,
+                    tabBarIcon: ({color,size})=> <MaterialCommunityIcons name='bed-king-outline' size={size} color={color}/>,
+                    
+                }}
+            />
+            <Tab.Screen 
                 name='Jogos'
-                component={Games}
+                component={ComponentGames}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({color,size})=> <Feather name='play' size={size} color={color}/>,

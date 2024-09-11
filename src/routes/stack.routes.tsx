@@ -16,7 +16,6 @@ export default function StackRoutes(){
             <Stack.Screen 
                 name="firstScreen"
                 component={OpenScreen}
-
             />
             <Stack.Screen
                 name="secondScreen"

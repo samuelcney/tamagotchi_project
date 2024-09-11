@@ -1,5 +1,5 @@
 export type typeTamagotchi = {
-    _id?: string;
+    _id: string;
     name: string;
     imageURL?: string;
     sleep: number;

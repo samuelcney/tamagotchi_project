@@ -124,7 +124,9 @@ export default function HomeScreen(){
             keyExtractor={(item)=> item._id?.toString() || item.name}
             renderItem={({item})=>(
 
-                <Pressable style={styles.item} onPress={()=> handleNavigate(item)} key={item._id}>
+                <Pressable style={[styles.item]} onPress={()=> handleNavigate(item)} key={item._id} disabled={item.status === "Morto" ? true : false}>
+
+                    <Image source={{uri: 'https://static.vecteezy.com/system/resources/thumbnails/017/178/409/small/red-cross-check-mark-on-transparent-background-free-png.png'}} style={item.status === "Morto" ? {position: 'absolute', width: '100%', height: "100%", alignItems: 'center', justifyContent: 'center', zIndex: 1, resizeMode: 'contain'} : {display:'none'}}/>
 
                     <Feather color={'#fff'} size={24} name="trash-2" style ={styles.trashIcon} onPress={()=>alertRemove(item._id)}/>
 

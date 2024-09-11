@@ -1,10 +1,11 @@
 import { typeTamagotchi } from '../../types/tamagotchiType'
 import { useTheme } from '../../components/ThemeProvider';
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import Tamagotchi from '../../components/TamagotchiModel';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
+import { getRealm } from '../../db/realm';
 
 export default function GuriScreen({...rest}:typeTamagotchi) {
   
@@ -14,7 +15,7 @@ export default function GuriScreen({...rest}:typeTamagotchi) {
 
   if(!rest){
     return(
-      <View className='flex-1 items-center' style={{backgroundColor:themeColor}}>
+      <View className='flex-1 items-center justify-center' style={{backgroundColor:themeColor}}>
         <Text>Carregando...</Text>
       </View>
     )
@@ -30,6 +31,7 @@ export default function GuriScreen({...rest}:typeTamagotchi) {
         </View>
 
       <Tamagotchi 
+        _id={rest._id}
         name={rest.name}
         imageURL={rest.imageURL}
         happiness={rest.happiness}

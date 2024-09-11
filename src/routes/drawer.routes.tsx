@@ -34,14 +34,14 @@ export default function DrawerRoutes(){
                 name="Cupinchas"
                 component={Register}
                 options={{
-                    drawerLabel: 'Adicionar cupincha',
+                    drawerLabel: 'Adicionar guri',
                     drawerIcon: ({color,size})=><Feather name="smile" color={color} size={size}/>,
                     headerTitleAlign: 'center',
                     title: ''
                 }}
             />
             <Drawer.Screen 
-                name='Settings'
+                name='Configurações'
                 component={Settings}
                 options={{
                     drawerIcon: ({color,size})=> <Feather name='settings' size={size} color={color}/>,

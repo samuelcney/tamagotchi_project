@@ -9,6 +9,27 @@ import { typeTamagotchi } from '../types/tamagotchiType';
 
 export default function App() {
 
+  const getStatus = (currentValue: number): string => {
+    switch (true) {
+      case currentValue === 0:
+        return "Morto";
+      case currentValue <= 50:
+        return "Crítico";
+      case currentValue <= 100:
+        return "Muito triste";
+      case currentValue <= 150:
+        return "Triste";
+      case currentValue <= 200:
+        return "Ok";
+      case currentValue <= 250:
+        return "Bem";
+      case currentValue <= 300:
+        return "Muito bem";
+      default:
+        return "Tem algo errado...";
+    }
+  };
+
   const updateTamagotchiStatus = async()=>{
     try {
       const realm = await getRealm()
@@ -20,6 +41,11 @@ export default function App() {
             item.hungry = Math.max(0, item.hungry - 10);
             item.sleep = Math.max(0, item.sleep - 10);
             item.happiness = Math.max(0, item.happiness - 10);
+
+            let somaStatus = item.happiness + item.hungry + item.sleep
+            let updateStatus = getStatus(somaStatus)
+
+            item.status = updateStatus
         })
       })
     }
@@ -32,7 +58,7 @@ export default function App() {
 
     const intervalId = setInterval(() => {
       updateTamagotchiStatus()
-    }, 6 * 60 * 1000)
+    }, 2 * 60 * 1000)
     
     return () =>{
       clearInterval(intervalId)
@@ -46,4 +72,3 @@ export default function App() {
   );
 }
 
-AppRegistry.registerComponent('MyApp', () => App);

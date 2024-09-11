@@ -1,8 +1,9 @@
+import { typeTamagotchi } from "@/types/tamagotchiType";
 import { useTheme } from "../../components/ThemeProvider";
 import React from "react";
 import { Pressable, StyleSheet, Text, View } from "react-native";
 
-export default function GameScreen(){
+export default function GameScreen({...rest}:typeTamagotchi){
 
     const {themeColor} = useTheme()
 
