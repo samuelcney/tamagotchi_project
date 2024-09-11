@@ -64,7 +64,7 @@ export default function Room({...rest}:typeTamagotchi){
         style={{backgroundColor: themeColor}}>
             <View className="items-center mb-20 mt-10">
                 <MaterialCommunityIcons name="sleep" size={50} color={'#fff'}/>
-                <Text className="font-bold text-xl text-white">{sleep}</Text>
+                <Text className="font-bold text-2xl text-white">{sleep}</Text>
             </View>
 
             <View className=" justify-center items-center mb-16">

@@ -5,7 +5,6 @@ import { Pressable, Text, View } from 'react-native';
 import Tamagotchi from '../../components/TamagotchiModel';
 import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
-import { getRealm } from '../../db/realm';
 
 export default function GuriScreen({...rest}:typeTamagotchi) {
   

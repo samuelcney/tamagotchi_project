@@ -2,7 +2,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs'
 import { useTheme } from '../components/ThemeProvider'
 
 import Kitchen from '../screens/Tamagotchi/Kitchen'
-import Games from '../screens/Tamagotchi/GameScreen'
+import Games from '../screens/Tamagotchi/Games/GameScreen'
 import GuriScreen from '../screens/Tamagotchi/Guri'
 
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons'

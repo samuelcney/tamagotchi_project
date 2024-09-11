@@ -19,7 +19,7 @@ export default function Kitchen({...rest}:typeTamagotchi){
         style={{backgroundColor: themeColor}}>
             <View className="items-center mb-20 mt-10">
                 <MaterialCommunityIcons name="food-drumstick-outline" size={50} color={'#fff'}/>
-                <Text className="font-bold text-xl text-white">{hungry}</Text>
+                <Text className="font-bold text-2xl text-white">{hungry}</Text>
             </View>
 
             <View className="mt-10">

@@ -30,7 +30,7 @@ export default function App() {
     }
   };
 
-  const updateTamagotchiStatus = async()=>{
+  const updateTamagotchiParams = async()=>{
     try {
       const realm = await getRealm()
 
@@ -54,14 +54,41 @@ export default function App() {
     }
   }
 
+  
+  const updateTamagotchiStatus = async()=>{
+    try {
+      const realm = await getRealm()
+
+      realm.write(()=>{
+        const tamagotchi = realm.objects<typeTamagotchi>("Tamagotchi")
+
+        tamagotchi.forEach((item)=>{
+            let somaStatus = item.happiness + item.hungry + item.sleep
+            let updateStatus = getStatus(somaStatus)
+
+            item.status = updateStatus
+        })
+      })
+    }
+    catch(error){
+      console.log("Erro ao atualizar: " + error)
+    }
+  }
+
+
   useEffect(()=>{
 
-    const intervalId = setInterval(() => {
+    const decayId = setInterval(() => {
+      updateTamagotchiParams()
+    }, 3 * 60 * 1000)
+
+    const statusId = setInterval(() => {
       updateTamagotchiStatus()
-    }, 2 * 60 * 1000)
+    }, 30 * 1000)
     
     return () =>{
-      clearInterval(intervalId)
+      clearInterval(decayId)
+      clearInterval(statusId)
     }
   },[])
 
