@@ -31,7 +31,7 @@ export default function DrawerRoutes(){
                 }}
             />
             <Drawer.Screen 
-                name="Cupinchas"
+                name="Guris"
                 component={Register}
                 options={{
                     drawerLabel: 'Adicionar guri',

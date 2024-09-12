@@ -1,7 +1,7 @@
 import { typeTamagotchi } from "@/types/tamagotchiType";
 import { useTheme } from "../../components/ThemeProvider"
 import React, { useState } from "react";
-import { Alert, Image, Pressable, Text, View } from "react-native";
+import { Image , Text, View } from "react-native";
 import Foods from "../../components/Foods";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
@@ -23,7 +23,7 @@ export default function Kitchen({...rest}:typeTamagotchi){
             </View>
 
             <View className="mt-10">
-                <Image source={{uri: rest.imageURL}} width={200} height={200}/>
+                <Image source={{uri: rest.imageURL}} width={250} height={250}/>
             </View>
 
             <Foods id={rest._id} onUpdateHungry={handleUpdate}/>    

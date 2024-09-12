@@ -74,7 +74,7 @@ export default function HomeScreen(){
     }
 
     function handleNavigate(tamagotchi: typeTamagotchi){
-        navigation.navigate('thirdScreen', {tamagotchi})
+        navigation.navigate('secondScreen', {tamagotchi})
     }
 
     useEffect(() => {

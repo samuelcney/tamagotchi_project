@@ -3,10 +3,15 @@ import { useTheme } from '../../components/ThemeProvider';
 import uuid from 'react-native-uuid';
 
 import Input from '../../components/Input';
-import { View, Button, Alert, Text } from 'react-native';
+import { View, Button, Alert, Text, Image, Pressable, StyleSheet } from 'react-native';
 
 import {getRealm} from '../../db/realm'
 import { ScrollView } from 'react-native-gesture-handler';
+
+type typeRegister = {
+  id: number,
+  url: string
+}
 
 export default function Register() {
 
@@ -14,6 +19,8 @@ export default function Register() {
 
   const [name, setName] = useState<string>('')
   const [imageURL, setImageURL] = useState<string>('')
+
+  const [actualID, setActualID] = useState<number>(0)
 
   async function addNewTamagotchi(){
     const realm = await getRealm()
@@ -37,10 +44,10 @@ export default function Register() {
 
       else{
         Alert.alert("Preencha todos os campos!!!")
-        return
       }
     })
       
+    setActualID(0)
       setName('')
       setImageURL('')
     }
@@ -50,15 +57,55 @@ export default function Register() {
     }
   }
 
+  const defaultGuri = [
+    {id: 1, url: 'https://www.gifs-animados.net/musica/musica260.gif',},
+    {id: 2, url: 'https://i.pinimg.com/originals/e0/27/6c/e0276c6c146a7c73b9c9e5b0c6d8f3d1.gif'},
+    {id: 3, url: 'https://i.pinimg.com/originals/a0/13/2d/a0132d5f962e0349c3bad68930e32f1b.gif'},
+    {id: 4, url: 'https://www.imagui.com/i/gifs-animados-ambiente-imagui-2512184.gif'} ,
+    {id: 5, url: 'https://i.pinimg.com/originals/69/e3/1c/69e31c906053ba70dfb1e7dc9120b41d.gif'},
+    {id: 6, url: 'https://campi2015.wordpress.com/wp-content/uploads/2015/10/campesino-agricultor-04.gif'}
+  ]
+
+  const theChosenGuri = ({id,url} : typeRegister)=>{
+      setImageURL(url)
+      setActualID(id)
+  }
 
   return (
     <ScrollView>
-      <View className='flex-1 gap-4 mt-24 p-7'>
-        <Text className='text-xl font-bold'>Registre aqui seu Guri:</Text>
-        <Input placeholder='Nome para o cupincha' value={name} onChangeText={setName}/>
-        <Input placeholder='Insira o link da imagem' value={imageURL} onChangeText={setImageURL}/>
+      <View className='flex-1 gap-4 p-7'>
+        <Text className='text-xl font-bold'>Registre aqui um Guri:</Text>
+        <Input placeholder='Insira o nome aqui' value={name} onChangeText={setName}/>
+        <Input placeholder='Insira o link da imagem ou selecione um guri abaixo' value={imageURL} onChangeText={setImageURL} />
+
+        <View style={styles.imageContainer}>
+        {
+          defaultGuri.map(item =>(
+          <Pressable key={item.id} style={[styles.itemImage, actualID === item.id? {borderColor: themeColor} : {borderColor:'#999'}]} onPress={()=>{
+            theChosenGuri(item)
+          }}>
+            <Image source={{uri: item.url}} style={{width: '100%', height: '100%', resizeMode: 'contain'}}/> 
+          </Pressable>           
+          ))
+        }
+        </View>
+
         <Button title='Salvar' color={themeColor} onPress={addNewTamagotchi}/>
       </View> 
     </ScrollView>
   );
 }
+
+const styles = StyleSheet.create({
+  imageContainer:{
+    flexDirection:'row',
+    flexWrap: 'wrap', 
+    justifyContent: 'center', 
+    gap: 15
+  },
+  itemImage: {
+    width: 170, 
+    height: 150,
+    borderWidth: 3
+  }
+})
