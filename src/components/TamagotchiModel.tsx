@@ -7,9 +7,9 @@ export default function Tamagotchi({ name, imageURL, sleep, happiness, hungry, s
     return(
     <View className="items-center flex-1 justify-between">
 
-        <View className="items-center">
+        <View className="items-center p-3">
             <Text className="font-bold text-4xl mb-3 color-white">{name}</Text>
-            <Text className="font-bold">"{status}"</Text>
+            <Text className="font-bold mt-2 text-xl">"{status}"</Text>
         </View>
             
             <View style={styles.imageContainer}>

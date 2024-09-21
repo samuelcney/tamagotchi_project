@@ -15,8 +15,12 @@ export default function GameScreen({...rest}:typeTamagotchi){
         navigation.navigate("gameOne", { tamagotchi: rest })
     }
 
+    const handleNavigateTwo = (rest: typeTamagotchi)=>{
+        navigation.navigate("gameTwo", {tamagotchi: rest})
+    }
+
     return(
-        <View className='flex-1 items-center justify-center gap-24' style={{backgroundColor: themeColor}}>
+        <View className='flex-1 items-center justify-center gap-20 p-4' style={{backgroundColor: themeColor}}>
 
             <View className="items-center mt-1">
                 <MaterialCommunityIcons name="emoticon-happy-outline" size={50} color={'#fff'}/>
@@ -24,16 +28,16 @@ export default function GameScreen({...rest}:typeTamagotchi){
             </View>
             
         <View style={styles.gameContainer}>
-            <Text className='font-bold text-xl text-white'>Clique aqui para jogar pedra, papel e tesoura</Text>
+            <Text className='font-bold text-xl text-white'>Pedra, Papel e Tesoura</Text>
             <Pressable style={styles.game} onPress={()=>handleNavigateOne(rest)}>
-                <Feather name="play" size={150} color={'#fff'} style={{marginLeft:10}}/>
+                <Feather name="play" size={80} color={'#fff'} style={{marginLeft:10}}/>
             </Pressable>
         </View>
 
         <View style={styles.gameContainer}>
-            <Text className='font-bold text-xl text-white'>Clique aqui para tirar uma foto com seu Cupincha</Text>
-            <Pressable style={styles.game}>
-                <Feather name="play" size={150} color={'#fff'} style={{marginLeft:10}}/>
+            <Text className='font-bold text-xl text-white text-center'>Clique aqui para tirar uma foto com seu Caipira</Text>
+            <Pressable style={styles.game} onPress={()=>handleNavigateTwo(rest)}>
+                <Feather name="play" size={80} color={'#fff'} style={{marginLeft:10}}/>
             </Pressable>
         </View>
 
@@ -46,11 +50,11 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     game:{
-       width: 200,
-       height: 200,
-       borderWidth: 4,
+       width: 150,
+       height: 150,
+       borderWidth: 5,
        marginTop: 10,
-       borderRadius: 16,
+       borderRadius: 22,
        borderColor: '#fff',
        alignItems: 'center',
        justifyContent: 'center'

@@ -31,10 +31,10 @@ export default function DrawerRoutes(){
                 }}
             />
             <Drawer.Screen 
-                name="Guris"
+                name="Caipira"
                 component={Register}
                 options={{
-                    drawerLabel: 'Adicionar guri',
+                    drawerLabel: 'Adicionar Caipira',
                     drawerIcon: ({color,size})=><Feather name="smile" color={color} size={size}/>,
                     headerTitleAlign: 'center',
                     title: ''

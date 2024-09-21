@@ -7,7 +7,7 @@ import { Feather } from '@expo/vector-icons';
 import { useNavigation } from '@react-navigation/native';
 import { getRealm } from '../../db/realm';
 
-export default function GuriScreen({...rest}:typeTamagotchi) {
+export default function CaipiraScreen({...rest}:typeTamagotchi) {
   
   const {themeColor} = useTheme()
 

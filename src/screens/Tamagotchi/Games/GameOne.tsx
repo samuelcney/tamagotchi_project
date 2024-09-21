@@ -4,7 +4,8 @@ import { useTheme } from '../../../components/ThemeProvider';
 import { typeTamagotchi } from '@/types/tamagotchiType';
 import { useRoute } from '@react-navigation/native';
 import { getRealm } from '../../../db/realm';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
+import { Feather, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useNavigation } from 'expo-router';
 
 type Emote = {
   value: number;
@@ -19,6 +20,8 @@ export default function GameOne() {
   ];
 
   const route = useRoute()
+
+  const navigation = useNavigation()
 
   const {tamagotchi} = route.params as {tamagotchi: typeTamagotchi}
 
@@ -110,29 +113,38 @@ export default function GameOne() {
   },[updateHappy])
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: themeColor}]}>
+
+      <View style={{width: '100%', height: 28, justifyContent:'center', alignItems: 'flex-start'}} className="mt-2 ml-2">
+        <Pressable onPress={()=>{navigation.goBack()}}>
+            <Feather name="arrow-left" size={28} color={'#fff'}/>
+        </Pressable>   
+        </View>
 
       <View className='items-center mt-8'>
-        <MaterialCommunityIcons name="sleep" size={45} color={themeColor}/>
-        <Text className='font-bold text-2xl'>{happy}</Text>
+        <MaterialCommunityIcons name="emoticon-happy-outline" size={45} color={'#fff'}/>
+        <Text className='font-bold text-2xl text-white'>{happy}</Text>
       </View>
 
-      <Text className='text-2xl font-bold mt-2'>{result}</Text>
+      <Text className='text-2xl font-bold mt-2 text-white'>{result}</Text>
 
-      <View>
+      <View className='w-full'>
         <View className='flex-row items-center justify-center gap-5'>
 
-        <View className='items-center gap-1'>
-          <Text className='text-2xl font-bold'>Você</Text>
-          <View style={[styles.box, {backgroundColor: themeColor}]}>
-            <Text style={styles.itemBox}>{myEmote === null ? '???' : myEmote.item}</Text>  
+        <View className='items-center gap-1 w-56'>
+          <Text className='text-2xl font-bold text-white'>Você</Text>
+          <View style={[styles.box]}>
+            <Text style={styles.itemBox}>{myEmote === null ? '?' : myEmote.item}</Text>  
           </View>
         </View>
-        
-        <View className='items-center gap-1'>
-        <Text className='text-xl font-bold'>{tamagotchi?.name}</Text>
-          <View style={[styles.box, {backgroundColor: themeColor}]}>
-            <Text style={styles.itemBox}>{enemyEmote === null ? '???' : enemyEmote.item}</Text>
+
+        <Feather name='x'
+        style={{position: 'absolute', top:70}} size={44}/>
+
+        <View className='items-center gap-1 w-56'>
+        <Text className='text-xl font-bold text-white' ellipsizeMode='tail' numberOfLines={1}>{tamagotchi?.name}</Text>
+          <View style={[styles.box]}>
+            <Text style={styles.itemBox}>{enemyEmote === null ? '?' : enemyEmote.item}</Text>
           </View>
         </View>
       </View>
@@ -140,7 +152,7 @@ export default function GameOne() {
         
         <View style={styles.row}>
               {emotes.map((item) => (
-          <Pressable style={[styles.miniBox, {backgroundColor:themeColor}]} onPress={() => handleSetEmote(item)} key={item.value}>
+          <Pressable style={[styles.miniBox]} onPress={() => handleSetEmote(item)} key={item.value}>
                 <Text style={styles.itemBox}>{item.item}</Text>
             </Pressable>
               ))}
@@ -149,8 +161,8 @@ export default function GameOne() {
 
           <Pressable onPress={()=>{
             startGame(tamagotchi._id)
-          }} style={[styles.button, {backgroundColor: themeColor}]} disabled={gameInProgress === true ? true : false}>
-            <Text className='font-bold text-2xl text-white'>Jogar</Text>
+          }} style={[styles.button]} disabled={gameInProgress === true ? true : false}>
+            <Text style={{color: '#fff', fontWeight: 'bold', fontSize: 28, letterSpacing: 1.5}}>Jogar</Text>
           </Pressable>
     </View>
   );
@@ -161,45 +173,43 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    gap: 30,
+    gap: 20,
   },
   box: {
-    width: 180,
-    height: 170,
-    borderWidth: 2,
+    width: 150,
+    height: 140,
     alignItems: 'center',
     justifyContent: 'center',
-    borderRadius: 12,
-    borderColor: '#999'
+    borderRadius: 14,
+    backgroundColor: '#ffffff55',
   },
   miniBox: {
-    width: 130,
+    width: 120,
     height: 110,
-    borderWidth: 2,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 12,
-    borderColor: '#999'
+    backgroundColor: '#ffffff55',
   },
   row: {
     flexDirection: 'row',
     width: '100%',
     justifyContent: 'space-around',
-    marginTop: 30
+    marginTop: 80
+    
   },
   itemBox: {
     fontSize: 50,
     color: '#fff'
   },
   button:{
-    marginTop: 10,
-    borderWidth: 2,
+    marginTop: 40,
     padding: 10,
-    width: 150,
-    height: 60,
+    width: 200,
+    height: 70,
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 12,
-    borderColor: '#999'
+    backgroundColor: '#ffffff55',
   }
 });

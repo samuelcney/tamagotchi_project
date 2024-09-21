@@ -1,4 +1,4 @@
-package com.cupincha
+package com.sam.tamagotchi
 
 import android.os.Build
 import android.os.Bundle

@@ -3,7 +3,7 @@ import { useTheme } from '../components/ThemeProvider'
 
 import Kitchen from '../screens/Tamagotchi/Kitchen'
 import Games from '../screens/Tamagotchi/Games/GameScreen'
-import GuriScreen from '../screens/Tamagotchi/Guri'
+import CaipiraScreen from '../screens/Tamagotchi/Caipira'
 
 import { Feather, MaterialCommunityIcons } from '@expo/vector-icons'
 import { useRoute } from '@react-navigation/native'
@@ -19,7 +19,7 @@ export default function TabRoutesHome(){
     const route = useRoute()
     const {tamagotchi} = route.params as {tamagotchi: typeTamagotchi}
 
-    const ComponentGuri = () =><GuriScreen {...tamagotchi}/>
+    const ComponentCaipira = () =><CaipiraScreen {...tamagotchi}/>
     const ComponentKitchen = () =><Kitchen {...tamagotchi}/>
     const ComponentGames = () =><Games {...tamagotchi}/>
     const ComponentRoom = () =><Room {...tamagotchi}/>
@@ -36,7 +36,7 @@ export default function TabRoutesHome(){
         }}>
             <Tab.Screen 
                 name='Início'
-                component={ComponentGuri}
+                component={ComponentCaipira}
                 options={{
                     headerShown: false,
                     tabBarIcon: ({color,size})=> <Feather name='home' size={size} color={color} />,

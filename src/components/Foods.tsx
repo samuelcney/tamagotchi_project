@@ -4,6 +4,9 @@ import Chimarrao from '../../assets/images/chimarrao.png'
 import Espetinho from '../../assets/images/espeto.png'
 import Queijo from '../../assets/images/quejoMinas.png'
 import PaoDeQueijo from '../../assets/images/paoQueijo.png'
+import Pamonha from '../../assets/images/pamonha.png'
+import Belina from '../../assets/images/belina.png'
+import Makita from '../../assets/images/makita.png'
 import { getRealm } from "../db/realm";
 import { typeTamagotchi } from "@/types/tamagotchiType";
 
@@ -14,7 +17,7 @@ type FoodId = {
 
 export default function Foods({id, onUpdateHungry}: FoodId){
     
-    const foodsArray = [Chimarrao, Espetinho, Queijo, PaoDeQueijo]
+    const foodsArray = [Chimarrao, Espetinho, Queijo, PaoDeQueijo, Pamonha, Belina, Makita]
     
     const [food, setFood] = useState(Chimarrao)
 

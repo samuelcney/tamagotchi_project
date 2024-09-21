@@ -5,6 +5,7 @@ import DrawerRoutes from "./drawer.routes";
 import TabRoutesHome from "./tab.routes";
 import GameOne from "../screens/Tamagotchi/Games/GameOne";
 import { useTheme } from "../components/ThemeProvider";
+import GameTwo from "../screens/Tamagotchi/Games/GameTwo";
 
 const Stack = createNativeStackNavigator()
 
@@ -28,14 +29,10 @@ export default function StackRoutes(){
             <Stack.Screen 
                 name="gameOne"
                 component={GameOne}
-                options={{
-                    headerShown: true,
-                    title: '',
-                    headerStyle:{
-                        backgroundColor: themeColor
-                    },
-
-                }}
+            />
+            <Stack.Screen 
+                name="gameTwo"
+                component={GameTwo}
             />
         </Stack.Navigator>
     )

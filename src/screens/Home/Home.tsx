@@ -63,10 +63,12 @@ export default function HomeScreen(){
                 if(toRemove){
                     setTamagotchis(rest => rest.filter(item=> item._id !== id))
                     realm.delete(toRemove)
+                    setTamagotchis(rest => rest.filter(item => item._id !== id));
                 }
             })
 
             getTamagotchis()
+           
         }
         catch(error) {
             console.log(error)
@@ -119,7 +121,7 @@ export default function HomeScreen(){
             </Pressable>    
         </View>
         
-        <FlatList 
+        <FlatList
             data={tamagotchis}
             keyExtractor={(item)=> item._id?.toString() || item.name}
             renderItem={({item})=>(
@@ -131,10 +133,13 @@ export default function HomeScreen(){
                     <Feather color={'#fff'} size={24} name="trash-2" style ={styles.trashIcon} onPress={()=>alertRemove(item._id)}/>
 
                      <View className="items-center">
-                        <Text className="font-bold text-2xl color-slate-200 mb-2 mt-7">{item.name}
+                        <Text className="font-bold text-2xl color-slate-200 mb-2 mt-7"
+                        ellipsizeMode="tail"
+                        numberOfLines={1}
+                        >{item.name}
                         </Text>
                         
-                        <Text>"{item.status}"</Text>
+                        <Text className="font-semibold">"{item.status}"</Text>
                     </View>
                     
                     <Image source={{uri: !item.imageURL ? 'https://media.tenor.com/GVbLnw73qD8AAAAj/dancing-duck-karlo.gif' : item.imageURL}}
@@ -181,19 +186,21 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         borderWidth: 2,
         borderColor:'#e2e8f0',
-        padding: 20,
+        padding: 25,
         paddingBottom:25,
-        width:197,
+        width:180,
         maxHeight: 350,
         position: 'relative'
     },
     itemImage:{
         width: '100%',
-        height: '70%'
+        height: '70%',
+        aspectRatio: 0.7
+        
     },
     trashIcon:{
         position: 'absolute',
-        left: 166,
+        left: 150,
         bottom: 319
     },
     text:{

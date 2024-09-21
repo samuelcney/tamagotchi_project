@@ -23,7 +23,7 @@ export default function Kitchen({...rest}:typeTamagotchi){
             </View>
 
             <View className="mt-10">
-                <Image source={{uri: rest.imageURL}} width={250} height={250}/>
+                <Image source={{uri: rest.imageURL}} width={250} height={250} resizeMode="contain" className="aspect-square"/>
             </View>
 
             <Foods id={rest._id} onUpdateHungry={handleUpdate}/>    
