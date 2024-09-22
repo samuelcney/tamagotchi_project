@@ -61,18 +61,17 @@ export default function HomeScreen(){
                 const toRemove = realm.objectForPrimaryKey<typeTamagotchi>('Tamagotchi', id)
 
                 if(toRemove){
-                    setTamagotchis(rest => rest.filter(item=> item._id !== id))
-                    realm.delete(toRemove)
-                    setTamagotchis(rest => rest.filter(item => item._id !== id));
+                    const updatedTamagotchis = tamagotchis.filter(item => item._id !== id);
+                    realm.delete(toRemove);
+                    setTamagotchis(updatedTamagotchis);
+                    
                 }
-            })
-
-            getTamagotchis()
-           
+            })           
         }
         catch(error) {
             console.log(error)
-        }    
+        }  
+        
     }
 
     function handleNavigate(tamagotchi: typeTamagotchi){
@@ -82,11 +81,11 @@ export default function HomeScreen(){
     useEffect(() => {
         const loadTamagotchis = async () => {
             const realm = await getRealm();
-
             const tamagotchis = realm.objects<typeTamagotchi>("Tamagotchi");
 
             const listener = () => {
-                setTamagotchis(Array.from(tamagotchis));
+                const currentTamagotchis = Array.from(tamagotchis).filter(item => item.isValid());
+                setTamagotchis(currentTamagotchis);
             };
 
             tamagotchis.addListener(listener);
@@ -95,8 +94,7 @@ export default function HomeScreen(){
                 if (tamagotchis && tamagotchis.removeListener) {
                     tamagotchis.removeListener(listener);
                 }
-            };
-        };
+            }}
 
         loadTamagotchis();
     }, []);
@@ -108,7 +106,7 @@ export default function HomeScreen(){
                 <Feather name="refresh-cw" size={22} color={'#fff'}/>
             </Pressable>    
         </View>
-                    <Text className="text-xl">Não há Guris cadastrados...</Text>
+                    <Text className="text-xl">Não há caipiras cadastrados...</Text>
                 </View>
     }
 
@@ -123,7 +121,7 @@ export default function HomeScreen(){
         
         <FlatList
             data={tamagotchis}
-            keyExtractor={(item)=> item._id?.toString() || item.name}
+            keyExtractor={(item)=> item._id}
             renderItem={({item})=>(
 
                 <Pressable style={[styles.item]} onPress={()=> handleNavigate(item)} key={item._id} disabled={item.status === "Morto" ? true : false}>

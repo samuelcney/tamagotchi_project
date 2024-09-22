@@ -54,15 +54,13 @@ export default function App() {
     }
   }
 
-  
   const updateTamagotchiStatus = async()=>{
     try {
       const realm = await getRealm()
 
       realm.write(()=>{
         const tamagotchi = realm.objects<typeTamagotchi>("Tamagotchi")
-
-        tamagotchi.forEach((item)=>{
+          tamagotchi.forEach((item)=>{
             let somaStatus = item.happiness + item.hungry + item.sleep
             let updateStatus = getStatus(somaStatus)
 
@@ -74,7 +72,6 @@ export default function App() {
       console.log("Erro ao atualizar: " + error)
     }
   }
-
 
   useEffect(()=>{
 

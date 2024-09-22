@@ -10,6 +10,8 @@ import Makita from '../../assets/images/makita.png'
 import { getRealm } from "../db/realm";
 import { typeTamagotchi } from "@/types/tamagotchiType";
 
+import { Audio } from 'expo-av'
+
 type FoodId = {
     id: string,
     onUpdateHungry: (newHungryValue: number) => void;
@@ -20,6 +22,18 @@ export default function Foods({id, onUpdateHungry}: FoodId){
     const foodsArray = [Chimarrao, Espetinho, Queijo, PaoDeQueijo, Pamonha, Belina, Makita]
     
     const [food, setFood] = useState(Chimarrao)
+
+    const [sound, setSound] = useState<any>()
+
+    async function playSound(){
+        console.log('Loading Sound')
+
+        const { sound } = await Audio.Sound.createAsync(require('../../assets/audio/eatingSound.mp3'))
+        setSound(sound)
+
+        console.log('Playing sound')
+        await sound.playAsync()
+    }
 
     const getRandomFood = ()=>{
         let random = Math.floor(Math.random() * foodsArray.length)
@@ -59,13 +73,19 @@ export default function Foods({id, onUpdateHungry}: FoodId){
     }
 
     useEffect(()=>{
-
-    },[updateHungry])
+        return sound
+      ? () => {
+          console.log('Unloading Sound');
+          sound.unloadAsync();
+        }
+      : undefined;
+    },[sound])
     
     return(
         <Pressable onPress={()=>{
             getRandomFood(),
             updateHungry(id)
+            playSound()
             }} style={{width: '100%', height: 250}}>
 
             <Image source={{uri: 'https://static.vecteezy.com/system/resources/previews/016/587/263/original/wooden-tabletop-with-isolated-background-free-png.png'}} style={{width:'100%', height: '100%',position: 'absolute', resizeMode: 'cover'}}/>

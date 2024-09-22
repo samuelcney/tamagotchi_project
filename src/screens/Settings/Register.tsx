@@ -3,7 +3,7 @@ import { useTheme } from '../../components/ThemeProvider';
 import uuid from 'react-native-uuid';
 
 import Input from '../../components/Input';
-import { View, Button, Alert, Text, Image, Pressable, StyleSheet } from 'react-native';
+import { View, Button, Alert, Text, Image, Pressable, StyleSheet, TouchableOpacity } from 'react-native';
 
 
 import {getRealm} from '../../db/realm'
@@ -22,8 +22,9 @@ export default function Register() {
   const [imageURL, setImageURL] = useState<string>('')
 
   const [actualID, setActualID] = useState<number>(0)
-
-  const [checked, setChecked] = useState('first')
+  
+  const [checkedURL, setCheckedURL] = useState(false)
+  const [checkedDefault, setCheckedDefault] = useState(true)
 
   async function addNewTamagotchi(){
     const realm = await getRealm()
@@ -74,9 +75,20 @@ export default function Register() {
 
   ]
 
-  const theChosenGuri = ({id,url} : typeRegister)=>{
+  const theCaipira = ({id,url} : typeRegister)=>{
       setImageURL(url)
       setActualID(id)
+  }
+
+  const setUrlOption = ()=>{
+    setCheckedURL(true)
+    setCheckedDefault(false)
+    setImageURL('')
+  }
+
+  const setDefaultOption = ()=>{
+    setCheckedDefault(true)
+    setCheckedURL(false)
   }
 
   return (
@@ -85,22 +97,41 @@ export default function Register() {
         <Text className='text-xl font-bold'>Registre aqui um Caipira:</Text>
         <Input placeholder='Nome' value={name} onChangeText={setName}/>
         
-        <View>
-         
-        </View>
-        {/* <Input placeholder='Insira o link da imagem ou selecione um guri abaixo' value={imageURL} onChangeText={setImageURL} /> */}
+        <View style={{flexDirection: 'row', gap: 6}}>
+            <TouchableOpacity style={styles.externalButton} onPress={setDefaultOption}>
+              <View style={[styles.radioButton, checkedURL !== true ? {backgroundColor: themeColor} : {backgroundColor: '#Fff'}]}>
 
-        <View style={styles.imageContainer}>
+              </View>
+            </TouchableOpacity>
+            <Text>Caipiras</Text>
+            <TouchableOpacity style={[styles.externalButton, {marginLeft: 9}]} onPress={setUrlOption}>
+              <View style={[styles.radioButton, checkedURL === true ? {backgroundColor: themeColor} : {backgroundColor: '#Fff'}]}>
+
+              </View>
+            </TouchableOpacity>
+            <Text>URL</Text>
+        </View>
+
+        {
+          checkedDefault === true ? 
+          <View style={styles.imageContainer}>
         {
           caipiras.map(item =>(
           <Pressable key={item.id} style={[styles.itemImage, actualID === item.id? {borderColor: themeColor} : {borderColor:'#999'}]} onPress={()=>{
-            theChosenGuri(item)
+            theCaipira(item)
           }}>
             <Image source={{uri: item.url}} style={{width: '100%', height: '100%', resizeMode: 'contain'}}/> 
           </Pressable>           
           ))
         }
         </View>
+
+        :
+
+        <Input placeholder='Insira o link da imagem ou selecione um guri abaixo' value={imageURL} onChangeText={setImageURL} />
+
+        }
+        
 
         <Button title='Salvar' color={themeColor} onPress={addNewTamagotchi}/>
       </View> 
@@ -119,5 +150,18 @@ const styles = StyleSheet.create({
     width: 170, 
     height: 150,
     borderWidth: 3
+  },
+  radioButton:{
+    width: 12,
+    height: 12,
+    borderRadius: 50
+  },
+  externalButton:{
+    borderWidth: 2,
+    width: 20,
+    height: 20,
+    borderRadius: 50,
+    alignItems: 'center',
+    justifyContent: 'center'
   }
 })

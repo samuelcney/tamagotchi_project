@@ -4,14 +4,11 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack'
 import DrawerRoutes from "./drawer.routes";
 import TabRoutesHome from "./tab.routes";
 import GameOne from "../screens/Tamagotchi/Games/GameOne";
-import { useTheme } from "../components/ThemeProvider";
-import GameTwo from "../screens/Tamagotchi/Games/GameTwo";
+import GameTwo from "../screens/Tamagotchi/Games/GameCamera";
 
 const Stack = createNativeStackNavigator()
 
 export default function StackRoutes(){
-
-    const {themeColor} = useTheme()
 
     return(
         <Stack.Navigator screenOptions={{
@@ -33,6 +30,10 @@ export default function StackRoutes(){
             <Stack.Screen 
                 name="gameTwo"
                 component={GameTwo}
+                options={{
+                    headerShown: true,
+                    title: ''
+                }}
             />
         </Stack.Navigator>
     )
