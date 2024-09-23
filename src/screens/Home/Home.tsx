@@ -13,6 +13,7 @@ export default function HomeScreen(){
     const {themeColor} = useTheme()
     const [tamagotchis, setTamagotchis] = useState<typeTamagotchi[]>([])
     const [loading, setLoading] = useState(false)
+    const [imageError, setImageError] = useState(false)
 
     const navigation = useNavigation<any>()
 
@@ -113,13 +114,16 @@ export default function HomeScreen(){
     return(
         <View style={[{backgroundColor: themeColor}, styles.containerList]}>
 
-        <View style={{width: '100%', height: 20, justifyContent:'center', alignItems: 'flex-end'}} className="mb-3">
+        <View style={{width: '100%', height: 20, justifyContent:'center', alignItems: 'flex-end', marginBottom:10}}>
             <Pressable onPress={getTamagotchis}>
                 <Feather name="refresh-cw" size={22} color={'#fff'}/>
             </Pressable>    
         </View>
         
         <FlatList
+            key={'_'}
+            numColumns={2}
+
             data={tamagotchis}
             keyExtractor={(item)=> item._id}
             renderItem={({item})=>(
@@ -140,9 +144,9 @@ export default function HomeScreen(){
                         <Text className="font-semibold">"{item.status}"</Text>
                     </View>
                     
-                    <Image source={{uri: !item.imageURL ? 'https://media.tenor.com/GVbLnw73qD8AAAAj/dancing-duck-karlo.gif' : item.imageURL}}
+                    <Image source={{uri: !item.imageURL ? 'https://www.imagui.com/i/gifs-animados-ambiente-imagui-2512184.gif' : item.imageURL}}
                         style={styles.itemImage}
-                        onError={(e)=>console.log(e)}
+                        onError={()=>setImageError(true)}
                         resizeMode="contain"
                     />
                     
@@ -171,13 +175,12 @@ export default function HomeScreen(){
 const styles = StyleSheet.create({
     containerList:{
         flex: 1,
-        padding: 4,
+        padding:5
     },
     list:{
-        gap: 8,
-        flexDirection: 'row',
+        gap: 10,
         justifyContent:'center',
-        flexWrap: 'wrap'
+        alignItems: 'center',
     },
     item:{
         alignItems: 'center',
@@ -185,10 +188,10 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor:'#e2e8f0',
         padding: 25,
-        paddingBottom:25,
-        width:180,
+        width: 185,
         maxHeight: 350,
-        position: 'relative'
+        position: 'relative',
+        marginHorizontal: 5
     },
     itemImage:{
         width: '100%',

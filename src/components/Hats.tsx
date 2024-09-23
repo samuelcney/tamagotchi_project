@@ -5,14 +5,10 @@ import Duende from '../../assets/images/duende.png'
 import Mago from '../../assets/images/mago.png'
 import Cowboy from '../../assets/images/cowboy.png'
 import Bone from '../../assets/images/bone.png'
-import Fogo from '../../assets/images/fogo.gif'
-import { getRealm } from "@/db/realm";
-import { typeTamagotchi } from "@/types/tamagotchiType";
-
 
 export default function Hats(){
     
-    const hatsArray = [Cartola, Duende, Mago, Cowboy, Bone, Fogo]
+    const hatsArray = [Cartola, Duende, Mago, Cowboy, Bone]
     
     const [hat, setHat] = useState(Cowboy)
 

@@ -5,6 +5,7 @@ import DrawerRoutes from "./drawer.routes";
 import TabRoutesHome from "./tab.routes";
 import GameOne from "../screens/Tamagotchi/Games/GameOne";
 import GameTwo from "../screens/Tamagotchi/Games/GameCamera";
+import EditScreen from "../screens/Tamagotchi/Games/EditScreen";
 
 const Stack = createNativeStackNavigator()
 
@@ -35,6 +36,14 @@ export default function StackRoutes(){
                     title: ''
                 }}
             />
+            <Stack.Screen 
+            name="EditScreen"
+            component={EditScreen}
+            options={{
+                headerShown: true,
+                title: ''
+            }}
+        />
         </Stack.Navigator>
     )
 }

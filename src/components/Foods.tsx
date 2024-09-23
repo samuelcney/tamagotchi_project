@@ -26,12 +26,8 @@ export default function Foods({id, onUpdateHungry}: FoodId){
     const [sound, setSound] = useState<any>()
 
     async function playSound(){
-        console.log('Loading Sound')
-
         const { sound } = await Audio.Sound.createAsync(require('../../assets/audio/eatingSound.mp3'))
         setSound(sound)
-
-        console.log('Playing sound')
         await sound.playAsync()
     }
 
@@ -75,7 +71,6 @@ export default function Foods({id, onUpdateHungry}: FoodId){
     useEffect(()=>{
         return sound
       ? () => {
-          console.log('Unloading Sound');
           sound.unloadAsync();
         }
       : undefined;

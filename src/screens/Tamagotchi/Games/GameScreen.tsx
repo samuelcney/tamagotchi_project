@@ -35,9 +35,9 @@ export default function GameScreen({...rest}:typeTamagotchi){
         </View>
 
         <View style={styles.gameContainer}>
-            <Text className='font-bold text-xl text-white text-center'>Clique aqui para tirar uma foto com seu Caipira</Text>
+            <Text className='font-bold text-xl text-white text-center'>Tirar foto com o Caipira</Text>
             <Pressable style={styles.game} onPress={()=>handleNavigateTwo(rest)}>
-                <Feather name="play" size={80} color={'#fff'} style={{marginLeft:10}}/>
+                <Feather name="camera" size={80} color={'#fff'} />
             </Pressable>
         </View>
 
