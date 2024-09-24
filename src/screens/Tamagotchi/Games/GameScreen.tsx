@@ -20,12 +20,7 @@ export default function GameScreen({...rest}:typeTamagotchi){
     }
 
     return(
-        <View className='flex-1 items-center justify-center gap-20 p-4' style={{backgroundColor: themeColor}}>
-
-            <View className="items-center mt-1">
-                <MaterialCommunityIcons name="emoticon-happy-outline" size={50} color={'#fff'}/>
-                <Text className="font-bold text-2xl text-white">{rest.happiness}</Text>
-            </View>
+        <View className='flex-1 items-center justify-center gap-32 p-4' style={{backgroundColor: themeColor}}>
             
         <View style={styles.gameContainer}>
             <Text className='font-bold text-xl text-white'>Pedra, Papel e Tesoura</Text>
@@ -35,7 +30,7 @@ export default function GameScreen({...rest}:typeTamagotchi){
         </View>
 
         <View style={styles.gameContainer}>
-            <Text className='font-bold text-xl text-white text-center'>Tirar foto com o Caipira</Text>
+            <Text className='font-bold text-xl text-white text-center'>Tirar foto</Text>
             <Pressable style={styles.game} onPress={()=>handleNavigateTwo(rest)}>
                 <Feather name="camera" size={80} color={'#fff'} />
             </Pressable>
