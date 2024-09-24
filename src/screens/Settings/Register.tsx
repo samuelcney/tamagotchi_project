@@ -23,8 +23,8 @@ export default function Register() {
 
   const [actualID, setActualID] = useState<number>(0)
   
-  const [checkedURL, setCheckedURL] = useState(false)
-  const [checkedDefault, setCheckedDefault] = useState(true)
+  const [checkedURL, setCheckedURL] = useState<boolean>(false)
+  const [checkedDefault, setCheckedDefault] = useState<boolean>(true)
 
   async function addNewTamagotchi(){
     const realm = await getRealm()
@@ -84,11 +84,13 @@ export default function Register() {
     setCheckedURL(true)
     setCheckedDefault(false)
     setImageURL('')
+    setActualID(0)
   }
 
   const setDefaultOption = ()=>{
     setCheckedDefault(true)
     setCheckedURL(false)
+    setImageURL('')
   }
 
   return (
@@ -99,13 +101,13 @@ export default function Register() {
         
         <View style={{flexDirection: 'row', gap: 6}}>
             <TouchableOpacity style={styles.externalButton} onPress={setDefaultOption}>
-              <View style={[styles.radioButton, checkedURL !== true ? {backgroundColor: themeColor} : {backgroundColor: '#Fff'}]}>
+              <View style={[styles.radioButton, checkedURL !== true ? {backgroundColor: themeColor} : {backgroundColor: 'transparent'}]}>
 
               </View>
             </TouchableOpacity>
             <Text>Caipiras</Text>
             <TouchableOpacity style={[styles.externalButton, {marginLeft: 9}]} onPress={setUrlOption}>
-              <View style={[styles.radioButton, checkedURL === true ? {backgroundColor: themeColor} : {backgroundColor: '#Fff'}]}>
+              <View style={[styles.radioButton, checkedURL === true ? {backgroundColor: themeColor} : {backgroundColor: 'transparent'}]}>
 
               </View>
             </TouchableOpacity>
@@ -128,7 +130,7 @@ export default function Register() {
 
         :
 
-        <Input placeholder='Insira o link da imagem ou selecione um guri abaixo' value={imageURL} onChangeText={setImageURL} />
+        <Input placeholder='URL' value={imageURL} onChangeText={setImageURL} />
 
         }
         
@@ -144,11 +146,11 @@ const styles = StyleSheet.create({
     flexDirection:'row',
     flexWrap: 'wrap', 
     justifyContent: 'center', 
-    gap: 5
+    gap: 7
   },
   itemImage: {
-    width: 170, 
-    height: 150,
+    width: 172, 
+    height: 160,
     borderWidth: 3
   },
   radioButton:{

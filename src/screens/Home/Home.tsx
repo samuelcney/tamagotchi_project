@@ -151,8 +151,8 @@ export default function HomeScreen(){
                     />
                     
 
-                    <View className="flex-row w-full items-center justify-between ">
-                            <View className="items-center gap-0">
+                    <View className="flex-row w-full items-center justify-between">
+                            <View className="items-center">
                                 <MaterialCommunityIcons name="food-drumstick-outline" size={20} color={'#fff'}/>
                                 <Text style={styles.text}>{item.hungry}</Text>
                             </View>
@@ -188,10 +188,10 @@ const styles = StyleSheet.create({
         borderWidth: 2,
         borderColor:'#e2e8f0',
         padding: 25,
-        width: 185,
+        width: 186,
         maxHeight: 350,
         position: 'relative',
-        marginHorizontal: 5
+        marginHorizontal: 4
     },
     itemImage:{
         width: '100%',
@@ -201,7 +201,7 @@ const styles = StyleSheet.create({
     },
     trashIcon:{
         position: 'absolute',
-        left: 150,
+        left: 156,
         bottom: 319
     },
     text:{
